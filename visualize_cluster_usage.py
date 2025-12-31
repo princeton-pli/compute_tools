@@ -2,6 +2,7 @@ import sys
 import re
 import pandas as pd
 import matplotlib.pyplot as plt
+from datetime import datetime
 
 def parse_quantity(s: str) -> float:
     """Convert strings like 1024000MB into MB as float."""
@@ -75,7 +76,8 @@ def plot_per_node(df: pd.DataFrame, outfile="nodes.png"):
     for ax in axes:
         ax.tick_params(axis='x', rotation=90)
 
-    plt.suptitle("Per-node Resource Usage at Princeton PLI")
+    timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    plt.suptitle(f"Per-node Resource Usage at Princeton PLI - {timestamp}")
     plt.tight_layout()
     plt.savefig(outfile, dpi=150)
     print(f"Saved per-node stacked plot to {outfile}")
